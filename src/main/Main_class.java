@@ -95,8 +95,11 @@ public class Main_class {
         button4.addActionListener(new SearchLargestNumberAction(menuFrame));
         button5.addActionListener(new SearchSmallestNumberAction(menuFrame));
         button6.addActionListener(new SwapLargestSmallestNumbersAction(menuFrame));
-        button7.addActionListener(new DeleteNthElementAction(menuFrame, numbers));
+        button7.addActionListener(new DeleteNthElementAction(menuFrame));
         button8.addActionListener(new InsertionOfElementsAction(menuFrame, numbers));
+        button9.addActionListener(new DeleteElementsByDivisibilityAction(menuFrame));
+        button10.addActionListener(new DeleteElementsByUserInputAction(menuFrame, numbers));
+
 
         // Add buttons to the menu frame
         menuFrame.add(button1);

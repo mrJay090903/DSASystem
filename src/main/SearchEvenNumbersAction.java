@@ -6,41 +6,48 @@ import java.awt.event.ActionListener;
 
 public class SearchEvenNumbersAction implements ActionListener {
     private JFrame menuFrame; // Reference to the menu frame for displaying messages
-    private int[] numbers; // An array of numbers to search for even numbers
+    private int[] numbers; // An array of numbers to search for odd numbers
 
-    // Constructor to initialize the SearchEvenNumbersAction with a menu frame and an array of numbers
+    // Constructor to initialize the SearchOddNumbersAction with a menu frame and an array of numbers
     public SearchEvenNumbersAction(JFrame menuFrame, int[] numbers) {
         this.menuFrame = menuFrame; // Initialize the menu frame reference
         this.numbers = numbers; // Initialize the array of numbers
     }
 
- 
+    
     public void actionPerformed(ActionEvent e) {
-        String input = JOptionPane.showInputDialog(menuFrame, "Enter an odd number:"); // Prompt the user for input
+        // Prompt the user to enter 10 numbers separated by spaces
+        String input = JOptionPane.showInputDialog(menuFrame, "Enter 10 numbers separated by spaces:");
 
         try {
-            int userInput = Integer.parseInt(input); // Parse the user's input as an integer
+            // Split the user's input into an array of strings
+            String[] numberStrings = input.split(" ");
 
-            // Check if the user input is an even number between 1 and 10
-            if (userInput % 2 == 0 && userInput >= 1 && userInput <= 10) {
-                String result = "Even numbers in the array: ";
+            // Check if the user provided exactly 10 numbers
+            if (numberStrings.length == 10) {
+                // Parse the input strings into integers and store them in the numbers array
+                for (int i = 0; i < 10; i++) {
+                    numbers[i] = Integer.parseInt(numberStrings[i]);
+                }
 
-                // Iterate through the array of numbers and find even numbers
+                String result = "Odd numbers in the array: ";
+
+                // Iterate through the array of numbers and find odd numbers
                 for (int number : numbers) {
                     if (number % 2 == 0) {
-                        result += number + " "; // Add even numbers to the result string
+                        result += number + " "; // Add odd numbers to the result string
                     }
                 }
 
                 // Display the result in a dialog box
                 JOptionPane.showMessageDialog(menuFrame, result);
             } else {
-                // Display an error message if the input is not a valid even number within the specified range
-                JOptionPane.showMessageDialog(menuFrame, "Invalid input. Please enter an odd number between 1 and 10.");
+                // Display an error message if the user did not provide exactly 10 numbers
+                JOptionPane.showMessageDialog(menuFrame, "Invalid input. Please enter exactly 10 numbers.");
             }
         } catch (NumberFormatException ex) {
-            // Display an error message if the user's input is not a valid number
-            JOptionPane.showMessageDialog(menuFrame, "Invalid input. Please enter a valid number.");
+            // Display an error message if the user's input is not valid numbers
+            JOptionPane.showMessageDialog(menuFrame, "Invalid input. Please enter valid numbers.");
         }
     }
 }

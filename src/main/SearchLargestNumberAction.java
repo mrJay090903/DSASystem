@@ -1,4 +1,4 @@
-package main; // Package declaration
+package main;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,21 +12,31 @@ public class SearchLargestNumberAction implements ActionListener {
         this.menuFrame = menuFrame; // Initialize the menu frame reference
     }
 
-    
     public void actionPerformed(ActionEvent e) {
+        // Prompt the user to enter 10 numbers separated by spaces
+        String input = JOptionPane.showInputDialog(menuFrame, "Enter 10 numbers separated by spaces:");
+
+        // Split the input string into an array of numbers
+        String[] inputNumbers = input.split(" ");
+
+        // Check if the user entered exactly 10 numbers
+        if (inputNumbers.length != 10) {
+            JOptionPane.showMessageDialog(menuFrame, "Please enter exactly 10 numbers separated by spaces.");
+            return; // Exit the action if the input is not valid
+        }
+
         int[] numbers = new int[10]; // Create an array to store user-input numbers
 
-        // Loop to collect 10 numbers from the user
-        for (int i = 0; i < 10; i++) {
-            String input = JOptionPane.showInputDialog(menuFrame, "Enter number " + (i + 1) + ":"); // Prompt the user for input
-            
-            try {
-                numbers[i] = Integer.parseInt(input); // Parse the user's input as an integer
-            } catch (NumberFormatException ex) {
-                // Display an error message if the input is not a valid number and return from the action
-                JOptionPane.showMessageDialog(menuFrame, "Invalid input. Please enter a valid number.");
-                return; // Exit the action if the input is not a valid number
+        try {
+            // Convert the input strings into integers and store them in the numbers array
+            for (int i = 0; i < inputNumbers.length; i++) {
+                int number = Integer.parseInt(inputNumbers[i]);
+                numbers[i] = number;
             }
+        } catch (NumberFormatException ex) {
+            // Display an error message if any of the inputs are not valid numbers
+            JOptionPane.showMessageDialog(menuFrame, "Invalid input. Please enter valid numbers.");
+            return; // Exit the action if there are invalid inputs
         }
 
         int largest = numbers[0]; // Assume the first number is the largest
